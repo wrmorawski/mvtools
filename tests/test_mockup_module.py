@@ -1,4 +1,4 @@
-import pytest 
+import pytest
 
 from mvtools.mockup_module import mockup_function
 
@@ -7,9 +7,9 @@ def a():
     return 10
 
 @pytest.fixture
-def b(): 
+def b():
     return 2.5
 
-def test_mockup_function(a, b): 
+def test_mockup_function(a, b):
     result = mockup_function(a, b)
     assert result == 4.0
