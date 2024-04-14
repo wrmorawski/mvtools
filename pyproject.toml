@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "mvtools"
+version = "0.1.0"
+description = "A package for missing values maintenance."
+authors = ["Wiktor Morawski <wrmorawski@gmail.com>"]
+license = "MIT license"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pandas = "^2.2.2"
+numpy = "^1.26.4"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.1.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
