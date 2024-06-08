@@ -1,5 +1,7 @@
 import pandas as pd
 
+from mvtools.utils.messeges import NOT_FOUND_DEFAULT_METHOD
+
 # methods = [
 #     "mean",
 #     "median",
@@ -31,7 +33,7 @@ class SimpleImputer:
                 value = METHODS[default](data)
                 data = data.fillna(value)
             else:
-                raise ValueError(f"Default method {default} not in methods")
+                raise ValueError(NOT_FOUND_DEFAULT_METHOD(default))
         return data
 
     def fill():
