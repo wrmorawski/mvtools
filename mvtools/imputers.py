@@ -1,17 +1,40 @@
 import pandas as pd
 
-methods = [
-    "mean",
-    "median",
-    "mean",
-]
+# methods = [
+#     "mean",
+#     "median",
+#     "mean",
+#     "max",
+#     "min"
+# ]
+
+METHODS = {
+    "mean": lambda df: df.mean(),
+    "median": lambda df: df.median(),
+    "max": lambda df: df.max(),
+    "min": lambda df: df.min(),
+}
 
 
 class SimpleImputer:
-    def __init__(self, methods: dict):
-        self.methods = methods
 
-    def fill(self, data: pd.DataFrame) -> pd.DataFrame:
+    def impute(
+        self,
+        data: pd.DataFrame,
+        methods: dict = None,
+        default: str = None,
+        skip: list = [],
+    ) -> pd.DataFrame:
+
+        if default is not None:
+            if default in METHODS.keys():
+                value = METHODS[default](data)
+                data = data.fillna(value)
+            else:
+                raise ValueError(f"Default method {default} not in methods")
+        return data
+
+    def fill():
         pass
 
 

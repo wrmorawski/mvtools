@@ -28,6 +28,30 @@ def numerical_input_data():
 
 
 @pytest.fixture
+def numerical_output_data_mean():
+    return pd.DataFrame(
+        {
+            "col1": [1, 2, 3, 5.5, 5, 6, 5.5, 8, 9, 10],
+            "col2": [
+                1.1,
+                5.871428571428572,
+                3.5,
+                4.4,
+                5.871428571428572,
+                6.1,
+                7.2,
+                8.8,
+                5.871428571428572,
+                10.0,
+            ],
+            "col3": [1, 1, 2, 3, 5, 8, 13, 21, 34, 55],
+            "col4": [1.1, 5, 3.5, 4.7, 5, 6.2, 2.2, 8.1, 6.2, 20.0],
+            "col5": [6, 3, 7, 1, 5, 3, 7, 23, 6, 2],
+        }
+    )
+
+
+@pytest.fixture
 def numerical_output_data():
     return pd.DataFrame(
         {
