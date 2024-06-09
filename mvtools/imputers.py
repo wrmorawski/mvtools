@@ -1,6 +1,6 @@
 import pandas as pd
 
-from mvtools.utils.messeges import NOT_FOUND_DEFAULT_METHOD
+from mvtools.utils.messeges import COLUMN_NOT_FOUND, METHOD_NOT_FOUND
 
 # methods = [
 #     "mean",
@@ -28,12 +28,22 @@ class SimpleImputer:
         skip: list = [],
     ) -> pd.DataFrame:
 
-        if default is not None:
+        if methods:
+            for col, method in methods.items():
+                if method in METHODS.keys() and col in data.columns:
+                    value = METHODS[method](data[col])
+                    data[col] = data[col].fillna(value)
+                elif method not in METHODS.keys():
+                    raise ValueError(METHOD_NOT_FOUND.format(method=method))
+                elif col not in data.columns:
+                    raise ValueError(COLUMN_NOT_FOUND.format(column=col))
+
+        if default:
             if default in METHODS.keys():
                 value = METHODS[default](data)
                 data = data.fillna(value)
             else:
-                raise ValueError(NOT_FOUND_DEFAULT_METHOD(default))
+                raise ValueError(METHOD_NOT_FOUND.format(method=default))
         return data
 
     def fill():
