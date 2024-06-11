@@ -38,3 +38,16 @@ def test_simple_imputer_fill_no_column_fail(numerical_input_data):
         results = imputer.impute(numerical_input_data, methods={"zurek": "mean"})
     print(e.value)
     assert str(e.value) == "Column zurek not found in data"
+
+
+def test_simple_inmputer_with_skip(numerical_input_data):
+    imputer = SimpleImputer()
+    results = imputer.impute(
+        numerical_input_data, methods={"col1": "mean"}, default="max", skip=["col2"]
+    )
+
+    assert "col2" in results.columns
+    assert results["col2"].isna().any() == True
+    assert results.drop(columns="col2").isna().any().any() == False
+
+    # assert that np in

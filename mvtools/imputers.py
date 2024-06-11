@@ -2,14 +2,6 @@ import pandas as pd
 
 from mvtools.utils.messeges import COLUMN_NOT_FOUND, METHOD_NOT_FOUND
 
-# methods = [
-#     "mean",
-#     "median",
-#     "mean",
-#     "max",
-#     "min"
-# ]
-
 METHODS = {
     "mean": lambda df: df.mean(),
     "median": lambda df: df.median(),
@@ -39,9 +31,11 @@ class SimpleImputer:
                     raise ValueError(COLUMN_NOT_FOUND.format(column=col))
 
         if default:
+            all_columns = data.columns
+            columns_to_fill = list(set(all_columns) - set(skip))
             if default in METHODS.keys():
                 value = METHODS[default](data)
-                data = data.fillna(value)
+                data[columns_to_fill] = data[columns_to_fill].fillna(value)
             else:
                 raise ValueError(METHOD_NOT_FOUND.format(method=default))
         return data
